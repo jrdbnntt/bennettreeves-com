@@ -35,7 +35,7 @@ gulp.task('static', function copyStaticFilesToBuild() {
 gulp.task('css', function compileSass() {
   var sourcemaps = require('gulp-sourcemaps')
   var autoprefixer = require('gulp-autoprefixer')
-  var sass = require('gulp-sass')
+  var sass = require('gulp-sass')(require('sass'))
   return gulp.src([
     dirs.src + '/css/**/*.scss',
     '!' + dirs.src + '/css/_*',
@@ -43,7 +43,7 @@ gulp.task('css', function compileSass() {
   ])
   .pipe(sourcemaps.init())
   .pipe(sass.sync({
-    outputStyle: 'compact'
+    outputStyle: 'expanded'
   }).on('error', sass.logError))
   .pipe(autoprefixer({
     cascade: false
@@ -148,18 +148,15 @@ gulp.task('publishCurrentBuild', function deployToGithubPages(done) {
 })
 gulp.task('deploy', gulp.series(gulp.parallel('build', 'img'), 'publishCurrentBuild'))
 
-var externalIp = '120.0.0.1'
-gulp.task('resolveIp', function (done) {
-  var getIP = require('external-ip')()
-  getIP(function (err, ip) {
-    if (err) {
-      done(err)
-    } else {
-      externalIp = ip
-      console.log('External IP: ' + externalIp)
-      done()
-    }
-  })
+var externalIp = '127.0.0.1'
+gulp.task('resolveIp', async function () {
+  try {
+    var res = await fetch('https://api.ipify.org')
+    externalIp = (await res.text()).trim()
+    console.log('External IP: ' + externalIp)
+  } catch (err) {
+    console.log('Could not resolve external IP, defaulting to ' + externalIp)
+  }
 })
 
 /**

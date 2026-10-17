@@ -1,12 +1,14 @@
+@use "../variables";
+
 .art-thumb {
     display: block;
     width: auto;
     height: auto;
-    margin-bottom: $base-padding * 2;
-    max-width: $base-art-maxThumbWidth;
+    margin-bottom: variables.$base-padding * 2;
+    max-width: variables.$base-art-maxThumbWidth;
 
     img {
-        margin-bottom: $base-padding / 2;
+        margin-bottom: variables.$base-padding * 0.5;
     }
 }
 

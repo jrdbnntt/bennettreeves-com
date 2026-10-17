@@ -1,3 +1,7 @@
+@use "../variables";
+
+@use "sass:color";
+
 /*!
  * Original CSS from:
  *
@@ -16,7 +20,7 @@
     position: relative;
 
     &.toggled {
-        padding-left: $sidebar-width;
+        padding-left: variables.$sidebar-width;
     }
 }
 
@@ -27,11 +31,11 @@
     display: block;
     top: 0;
     left: 0px;
-    padding-left: $base-padding;
-    height: $topbar-height;
-    line-height: $topbar-height;
+    padding-left: variables.$base-padding;
+    height: variables.$topbar-height;
+    line-height: variables.$topbar-height;
     width: 100%;
-    background-color: $base-background;
+    background-color: variables.$base-background;
 
 
     .topbar-brand {
@@ -51,14 +55,14 @@
         pointer-events: auto;
         display: block;
         position: absolute;
-        right: $base-padding;
+        right: variables.$base-padding;
         top: 11px;
         padding: 5px 10px;
         font-size: 18px;
-        background-color: darken($base-background, 5%);
+        background-color: color.adjust(variables.$base-background, $lightness: -5%, $space: hsl);
 
         &:hover {
-            background-color: darken($base-background, 10%);
+            background-color: color.adjust(variables.$base-background, $lightness: -10%, $space: hsl);
         }
     }
 
@@ -67,29 +71,29 @@
 #sidebar-wrapper {
     z-index: 1000;
     position: fixed;
-    left: $sidebar-width;
+    left: variables.$sidebar-width;
     width: 0;
     height: 100%;
-    margin-left: -$sidebar-width;
+    margin-left: -(variables.$sidebar-width);
     overflow-y: auto;
-    background: $base-background;
+    background: variables.$base-background;
     transition: all 0.5s ease;
 }
 
 #wrapper.toggled #sidebar-wrapper {
-    width: $sidebar-width;
+    width: variables.$sidebar-width;
 }
 
 #page-content-wrapper {
     width: 100%;
     min-height: 100%;
     position: absolute;
-    padding: $topbar-height $base-padding-sm $base-padding-sm $base-padding-sm;
+    padding: variables.$topbar-height variables.$base-padding-sm variables.$base-padding-sm variables.$base-padding-sm;
 }
 
 #wrapper.toggled #page-content-wrapper {
     position: absolute;
-    margin-right: -($sidebar-width - $base-padding);
+    margin-right: -(variables.$sidebar-width - variables.$base-padding);
 }
 
 /* Sidebar Styles */
@@ -97,14 +101,14 @@
 .sidebar-nav {
     position: absolute;
     top: 0;
-    width: $sidebar-width;
+    width: variables.$sidebar-width;
     padding: 0;
-    padding-top: $topbar-height;
+    padding-top: variables.$topbar-height;
     list-style: none;
     font-family: sans-serif;
 
     li {
-        text-indent: $base-padding;
+        text-indent: variables.$base-padding;
         line-height: 20px;
 
         a {
@@ -143,10 +147,10 @@
 
 
 // Large screens
-@media(min-width: $base-screen-sm) {
+@media(min-width: variables.$base-screen-sm) {
 
     #wrapper {
-        padding-left: $sidebar-width;
+        padding-left: variables.$sidebar-width;
 
         &.toggled {
             padding-left: 0;
@@ -154,7 +158,7 @@
     }
 
     #sidebar-wrapper {
-        width: $sidebar-width;
+        width: variables.$sidebar-width;
     }
 
     #wrapper.toggled #sidebar-wrapper {
@@ -162,7 +166,7 @@
     }
 
     #page-content-wrapper {
-        padding: $base-padding;
+        padding: variables.$base-padding;
         padding-left: 0px;
         position: relative;
     }

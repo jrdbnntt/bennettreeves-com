@@ -1,13 +1,15 @@
+@use "../variables";
+
 html, body {
     position: relative;
     width: 100%;
     height: 100%;
-    background-color: $base-background;
+    background-color: variables.$base-background;
 }
 
 .page-info {
     display: block;
-    padding-bottom: $base-padding;
+    padding-bottom: variables.$base-padding;
     width: 100%;
     max-width: 700px;
 }
@@ -18,19 +20,19 @@ html, body {
     min-height: 100vh;
 
     h1 {
-        font-size: $base-fontSize-header;
+        font-size: variables.$base-fontSize-header;
     }
 
     p {
-        font-size: $base-fontSize;
-        max-width: $base-art-maxThumbWidth;
+        font-size: variables.$base-fontSize;
+        max-width: variables.$base-art-maxThumbWidth;
     }
 
     .content {
         flex-grow: 1;
         
         p {
-            max-width: $base-art-maxThumbWidth;
+            max-width: variables.$base-art-maxThumbWidth;
         }
     }
 
