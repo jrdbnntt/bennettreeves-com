@@ -1,9 +1,9 @@
 {
-  "name": "tessbennett-com",
+  "name": "bennettreeves-com",
   "version": "1.0.0",
-  "homepage": "tessbennett.com",
-  "description": "tessbennett.com",
-  "repository": "https://github.com/jrdbnntt/tessbennett-com",
+  "homepage": "bennettreeves.com",
+  "description": "bennettreeves.com",
+  "repository": "https://github.com/jrdbnntt/bennettreeves-com",
   "main": "",
   "scripts": {
     "gulp:img": "gulp img",

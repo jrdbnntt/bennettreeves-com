@@ -9,12 +9,12 @@ var gulp = require('gulp')
 var pkg = require('./package.json')
 
 var banner =
-    '/** \n' +
-    ' * <%= pkg.name %> - <%= pkg.description %>\n' +
-    ' * @version v<%= pkg.version %>\n' +
-    ' * @link <%= pkg.homepage %>\n' +
-    ' * @license <%= pkg.license %>\n' +
-    ' */\n\n'
+  '/** \n' +
+  ' * <%= pkg.name %> - <%= pkg.description %>\n' +
+  ' * @version v<%= pkg.version %>\n' +
+  ' * @link <%= pkg.homepage %>\n' +
+  ' * @license <%= pkg.license %>\n' +
+  ' */\n\n'
 
 var dirs = {
   build: __dirname + '/build',
@@ -26,7 +26,7 @@ var dirs = {
  * Static files
  */
 gulp.task('static', function copyStaticFilesToBuild() {
-  return gulp.src(dirs.src + '/static/**/*').pipe(gulp.dest(dirs.build))
+  return gulp.src(dirs.src + '/static/**/*', { encoding: false }).pipe(gulp.dest(dirs.build))
 })
 
 /**
@@ -41,18 +41,18 @@ gulp.task('css', function compileSass() {
     '!' + dirs.src + '/css/_*',
     '!' + dirs.src + '/css/_*/**'
   ])
-  .pipe(sourcemaps.init())
-  .pipe(sass.sync({
-    outputStyle: 'expanded'
-  }).on('error', sass.logError))
-  .pipe(autoprefixer({
-    cascade: false
-  }))
-  .pipe(sourcemaps.write('./', {
-    addComment: true,
-    includeContent: true
-  }))
-  .pipe(gulp.dest(dirs.build + '/css'))
+    .pipe(sourcemaps.init())
+    .pipe(sass.sync({
+      outputStyle: 'expanded'
+    }).on('error', sass.logError))
+    .pipe(autoprefixer({
+      cascade: false
+    }))
+    .pipe(sourcemaps.write('./', {
+      addComment: true,
+      includeContent: true
+    }))
+    .pipe(gulp.dest(dirs.build + '/css'))
 })
 
 /**
@@ -65,11 +65,11 @@ gulp.task('html', function compilePug() {
     '!' + dirs.src + '/html/_*',
     '!' + dirs.src + '/html/_*/**'
   ])
-  .pipe(pug({
-    pretty: true,
-    locals: require(dirs.src + '/html/locals.js')
-  }))
-  .pipe(gulp.dest(dirs.build))
+    .pipe(pug({
+      pretty: true,
+      locals: require(dirs.src + '/html/locals.js')
+    }))
+    .pipe(gulp.dest(dirs.build))
 })
 
 /**
@@ -83,20 +83,20 @@ gulp.task('js', function minifyJs() {
   return gulp.src([
     dirs.src + '/js/**/*.js'
   ])
-  .pipe(sourcemaps.init())
-  .pipe(header(banner, {pkg: pkg}))
-  .pipe(rename(function (path) {
-    path.extname = '.min.js'
-  }))
-  .pipe(uglify({
-    mangle: true,
-    compress: true
-  }))
-  .pipe(sourcemaps.write('./', {
-    addComment: true,
-    includeContent: true
-  }))
-  .pipe(gulp.dest(dirs.build + '/js'))
+    .pipe(sourcemaps.init())
+    .pipe(header(banner, { pkg: pkg }))
+    .pipe(rename(function (path) {
+      path.extname = '.min.js'
+    }))
+    .pipe(uglify({
+      mangle: true,
+      compress: true
+    }))
+    .pipe(sourcemaps.write('./', {
+      addComment: true,
+      includeContent: true
+    }))
+    .pipe(gulp.dest(dirs.build + '/js'))
 })
 
 /**
@@ -105,27 +105,27 @@ gulp.task('js', function minifyJs() {
 gulp.task('img:resize', function imgResize() {
   var rename = require('gulp-rename')
   var imageResize = require('gulp-image-resize')
-  return gulp.src(dirs.cloud + '/img/originals/**/*.jpg')
-  .pipe(rename(function (path) {
-    path.basename = path.basename.replace(/\s/g, '_').toLowerCase()
-  }))
-  .pipe(imageResize({
-    width: 650,
-    height: 1000,
-    crop: false,
-    upscale: false,
-    quality: 1,
-    imageMagick: true
-  }))
-  .pipe(gulp.dest(dirs.build + '/img/thumbs'))
+  return gulp.src(dirs.cloud + '/img/originals/**/*.jpg', { encoding: false })
+    .pipe(rename(function (path) {
+      path.basename = path.basename.replace(/\s/g, '_').toLowerCase()
+    }))
+    .pipe(imageResize({
+      width: 650,
+      height: 1000,
+      crop: false,
+      upscale: false,
+      quality: 1,
+      imageMagick: true
+    }))
+    .pipe(gulp.dest(dirs.build + '/img/thumbs'))
 })
 gulp.task('img:copy', function imgCopy() {
   var rename = require('gulp-rename')
-  return gulp.src(dirs.cloud + '/img/**/*.jpg')
-  .pipe(rename(function (path) {
-    path.basename = path.basename.replace(/\s/g, '_').toLowerCase()
-  }))
-  .pipe(gulp.dest(dirs.build + '/img'))
+  return gulp.src(dirs.cloud + '/img/**/*.jpg', { encoding: false })
+    .pipe(rename(function (path) {
+      path.basename = path.basename.replace(/\s/g, '_').toLowerCase()
+    }))
+    .pipe(gulp.dest(dirs.build + '/img'))
 })
 
 gulp.task('img', gulp.parallel('img:copy', 'img:resize'))
@@ -183,7 +183,7 @@ gulp.task('demo', gulp.series('resolveIp', function runLocalDemo(done) {
   })
   server.on('listening', function () {
     console.log('Express app hosting static directory ', dirs.build)
-    console.log('Listening on localhost ' + port)
+    console.log('Listening on http://localhost:' + port)
     console.log('Externally Accessable @ http://' + externalIp + ':' + port)
     done()
   })

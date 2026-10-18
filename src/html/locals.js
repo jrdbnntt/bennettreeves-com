@@ -4,7 +4,7 @@
 
 var locals = {}
 
-locals.baseTitle = 'Ben Bennett'
+locals.baseTitle = 'Bennett Reeves'
 locals.getTitle = function (subtitle) {
   if (subtitle) {
     return locals.baseTitle + ' - ' + subtitle
