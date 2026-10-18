@@ -41,9 +41,18 @@
     .topbar-brand {
         // font-size: 18px;
         pointer-events: auto;
+        font-family: variables.$font-family-sidebar;
+        font-weight: 900;
 
         a {
             color: #000;
+            font-family: variables.$font-family-sidebar;
+            font-weight: 900;
+
+            b {
+                font-family: variables.$font-family-sidebar;
+                font-weight: 900;
+            }
 
             &:hover {
                 background: none;
@@ -105,16 +114,21 @@
     padding: 0;
     padding-top: variables.$topbar-height;
     list-style: none;
-    font-family: sans-serif;
+    font-family: variables.$font-family-sidebar;
+    font-weight: 700;
 
     li {
         text-indent: variables.$base-padding;
         line-height: 20px;
+        font-family: variables.$font-family-sidebar;
+        font-weight: 700;
 
         a {
             display: block;
             text-decoration: none;
             color: #000;
+            font-family: variables.$font-family-sidebar;
+            font-weight: 700;
 
             &:hover {
                 text-decoration: none;
@@ -127,13 +141,14 @@
             }
         }
 
-        &.active {
+        &.active,
+        &.active a {
             font-style: italic;
         }
     }
 
     > .divider {
-        font-weight: bold;
+        font-weight: 700;
         margin-top: 1em;
 
         &:first-of-type {
