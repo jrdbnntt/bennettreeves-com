@@ -33,6 +33,6 @@
   "devDependencies": {
     "concurrently": "^9.1.2",
     "express": "^4.21.2",
-    "morgan": "^1.10.0"
+    "morgan": "^1.12.1"
   }
 }
