@@ -105,7 +105,7 @@ gulp.task('js', function minifyJs() {
 gulp.task('img:resize', function imgResize() {
   var rename = require('gulp-rename')
   var imageResize = require('gulp-image-resize')
-  return gulp.src(dirs.cloud + '/img/originals/**/*.jpg', { encoding: false })
+  return gulp.src(dirs.cloud + '/img/originals/**/*.{jpg,png}', { encoding: false })
     .pipe(rename(function (path) {
       path.basename = path.basename.replace(/\s/g, '_').toLowerCase()
     }))
@@ -121,7 +121,7 @@ gulp.task('img:resize', function imgResize() {
 })
 gulp.task('img:copy', function imgCopy() {
   var rename = require('gulp-rename')
-  return gulp.src(dirs.cloud + '/img/**/*.jpg', { encoding: false })
+  return gulp.src(dirs.cloud + '/img/**/*.{jpg,png}', { encoding: false })
     .pipe(rename(function (path) {
       path.basename = path.basename.replace(/\s/g, '_').toLowerCase()
     }))

@@ -50,9 +50,8 @@ html
             #sidebar-wrapper
                 ul.sidebar-nav
                     for work in works
-                        if work.title === "This and that"
-                            li.divider
-                        li(class=(title===work.title? "active" : "")): a(href=`${work.link}`)=work.title
+                        if work.title !== "Archive"
+                            li(class=(title===work.title? "active" : "")): a(href=`${work.link}`)=work.title
 
                     li.divider
                     li(class=title === "Info"? "active" : ""): a(href="/info.html") Info
